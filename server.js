@@ -25,9 +25,10 @@ var item1 = new Item({item: 'bananas', complete: true})
 console.log(item1)
 
 
-//import the user routes
-// var todoRoutes = require('./routes/todo_routes.js')
-// app.use('/api', todoRoutes)
+//import the todo routes
+var todoRoutes = require('./routes/todo_routes.js')
+app.use('/api', todoRoutes)
+
 
 //setup server port to run app
 app.listen(3000)
