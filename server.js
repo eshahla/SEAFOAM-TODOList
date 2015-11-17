@@ -11,6 +11,9 @@ mongoose.connect('mongodb://samhager11:password123@ds055564.mongolab.com:55564/s
 // track requests to logger
 app.use(logger('dev'))
 
+// set the public folder as the static assets serving folder
+app.use(express.static('public'))
+
 //makes json object available in requests
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
