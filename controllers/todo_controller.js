@@ -1,4 +1,4 @@
-var Item      = require('../models/todo.js')
+var Item      = require('../models/item.js')
 
 // function to list all to do list items
 function index(req,res){

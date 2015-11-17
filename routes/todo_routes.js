@@ -1,4 +1,4 @@
-var todoController = './controllers/todo_controller.js'
+var todoController = require('../controllers/todo_controller.js')
 var express        = require('express')
 var todoRoutes     = express.Router()
 
