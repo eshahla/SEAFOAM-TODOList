@@ -30,9 +30,10 @@ function create(req,res){
 
 // destroy function
 function destroy(req,res){
-  Item.findOneAndRemove({_id:req.params.item_id}, function(err,item){
+  Item.remove({_id:req.params.id}, function(err,item){
     if (err) res.send(err)
-    res.json({success:true, message:"Item: " + item.item + " has been destroyed"})
+    console.log(item)
+    res.json({success:true, message:"You must have just done it"})
   })
 }
 
