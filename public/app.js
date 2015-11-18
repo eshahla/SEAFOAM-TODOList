@@ -1,41 +1,54 @@
-var $exes = $('.glyphicon-remove')
-var $star = $('.glyphicon-star')
-var $checkboxes = $('.checkboxes')
-var $span = $('span')
-var $paras = $('p')
-var text = $('#todo')
-
-function removeDiv() {
-  $(this).parent().hide('slow');
-}
-$exes.click(removeDiv);
-
-function colorStar(){
-  $(this).toggleClass('active');
-}
-$star.click(colorStar);
-
-function strikethrough(){
-  $(this).next().next().toggleClass('strikethrough');
-}
-$checkboxes.click(strikethrough);
-
 $('.btn').click(function(){
-  text = $('#todo')
-  $('.list').last().append('<p><input type="checkbox" class="checkboxes"><i class="glyphicon glyphicon-star"></i><span>'+ text.val() +'</span><i class="glyphicon glyphicon-remove"></i></p>');
+  text = $('.form-control');
+  $('#todo-list').last().append(text.val());
   text.val('');
-  $('p').last().hide();
-  $('p').last().show('slow');
-  event.preventDefault();
-  $exes = $('.glyphicon-remove')
-  $star = $('.glyphicon-star')
-  $checkboxes = $('.checkboxes')
-  $span = $('span')
-  $paras = $('p')
-  $exes.click(removeDiv);
-  $star.click(colorStar);
-  $checkboxes.click(strikethrough);
+});
+
+$.ajax({
+  url: '/api/todos',
+  method: 'GET',
+  success: function(data){
+    // console.log(data)
+      data.forEach(function(i){
+        var text = $('.todo');
+        var input = i.item
+        console.log(i.item)
+        $('.checkbox').last().append('<p><div class="checkbox"><label><input type="checkbox" ng-click="deleteTodo(todo._id)">' + input + '</label></div></p>')
+        //
+      })
+    }
 })
+
+// $.ajax({
+//         url: '/movies'
+//         ,method: 'GET'
+//         ,success: function(data){
+//             console.log(data);
+//
+//             data.forEach(function(m){
+//               var nameSpan = '<span class="movie-name">' + "Movie: " + m.name + '</span>'
+//               var ratingSpan = '<span class="movie-rating">' + "Rating: " + m.rating + '</span>'
+//               var showDetails ='<button class="show-details" id="'+ m._id +'" >Show Details</button>'
+//               var li = '<li>' + nameSpan + " | " + ratingSpan + " | " + showDetails + '</li>'
+//               $('.movies-list').append(li)
+//             });
+//             $('.show-details').on('click', function(evt){
+//               console.log('let us make a request to get the details');
+//               var movieId = this.id;
+//               //or console.log(evt.target.id)
+//               $.ajax({
+//                 //or /movies/ + evt.target.id
+//                 url: '/movies/' + movieId
+//                 ,method: 'GET'
+//                 ,success: function(data){
+//                   console.log(data);
+//                 }
+//               })
+//             })
+//         }
+//       })
+//     })
+
 
 //code from tony's lecture
 // $.ajax({
