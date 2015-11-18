@@ -1,7 +1,26 @@
+var $checkboxes = $('.checkboxes')
+function strikethrough(){
+ $(this).next().toggleClass('strikethrough');
+}
+$checkboxes.click(strikethrough);
+
+
 $('.btn').click(function(){
   text = $('.form-control');
-  $('#todo-list').last().append(text.val());
-  text.val('');
+  text = text.val();
+  $.ajax({
+    url: '/api/todos',
+    method: 'POST',
+    data: { item: text},
+    success: function(){
+    },
+    dataType: 'application/json'
+  })
+  $('.item').last().append('<p><input type="checkbox" class="checkboxes"><span>' + text + '</span></p>')
+  $('.form-control').val('');
+  $checkboxes = $('.checkboxes')
+  $checkboxes.click(strikethrough);
+
 });
 
 $.ajax({
@@ -13,8 +32,9 @@ $.ajax({
         var text = $('.todo');
         var input = i.item
         console.log(i.item)
-        $('.checkbox').last().append('<p><div class="checkbox"><label><input type="checkbox" ng-click="deleteTodo(todo._id)">' + input + '</label></div></p>')
-        //
+        $('.item').last().append('<p id=' + i.id + '><input type="checkbox" class="checkboxes"><span>' + input + '</span></p>')
+        $checkboxes = $('.checkboxes')
+        $checkboxes.click(strikethrough);
       })
     }
 })
